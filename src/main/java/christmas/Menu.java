@@ -20,6 +20,11 @@ public enum Menu {
     RED_WINE("Beverage","레드와인", 60_000),
     CHAMPAGNE("Beverage", "샴페인", 25_000);
 
+    public final static String MENU_CATEGORY_APPETIZER = "Appetizer";
+    public final static String MENU_CATEGORY_MAIN = "Main";
+    public final static String MENU_CATEGORY_DESSERT = "Dessert";
+    public final static String MENU_CATEGORY_BEVERAGE = "Beverage";
+
     private String menuCategory;
     private String menuKoreanName;
     private Integer price;
@@ -37,6 +42,15 @@ public enum Menu {
                 .sum();
     }
 
+    public static Integer countAmountOfMenuCategory(Map<String, Integer> foodOrder, String MenuCategory){
+        return Arrays.stream(Menu.values())
+                .filter(menu -> MenuCategory.equals(menu.menuCategory))
+                .map(menu -> menu.menuKoreanName)
+                .filter(foodOrder::containsKey)
+                .mapToInt(foodOrder::get)
+                .sum();
+
+    }
     public String getMenuCategory() {
         return menuCategory;
     }
