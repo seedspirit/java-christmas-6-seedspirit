@@ -2,7 +2,7 @@ package christmas.View.InputValidator;
 
 import static christmas.Constants.DomainConstants.EVENT_END_DATE;
 import static christmas.Constants.DomainConstants.EVENT_START_DATE;
-import static christmas.Constants.Message.ExceptionMsg.VisitDateErrorMsg.ASK_INPUT_IN_VALID_FORMAT;
+import static christmas.Constants.Message.ExceptionMsg.VisitDateErrorMsg.ASK_VISIT_DATE_INPUT_IN_VALID_FORMAT;
 import static christmas.Constants.Message.ExceptionMsg.VisitDateErrorMsg.ASK_NO_EMPTY_INPUT;
 import static christmas.Constants.Message.ExceptionMsg.VisitDateErrorMsg.ASK_NO_WHITE_SPACE;
 
@@ -33,13 +33,14 @@ public class VisitDateValidator {
 
     public void isNumber(String visitDateUserInput) throws IllegalArgumentException {
         if (!visitDateUserInput.matches(NUMBER_REGULAR_EXPRESSION)) {
-            throw new IllegalArgumentException(ASK_INPUT_IN_VALID_FORMAT.getMessage());
+            throw new IllegalArgumentException(ASK_VISIT_DATE_INPUT_IN_VALID_FORMAT.getMessage());
         }
     }
 
     public void isBetweenValidRange(String visitDateUserInput) throws IllegalArgumentException{
-        if(Integer.parseInt(visitDateUserInput) < EVENT_START_DATE || Integer.parseInt(visitDateUserInput) > EVENT_END_DATE){
-            throw new IllegalArgumentException(ASK_INPUT_IN_VALID_FORMAT.getMessage());
+        if(Integer.parseInt(visitDateUserInput) < EVENT_START_DATE
+                || Integer.parseInt(visitDateUserInput) > EVENT_END_DATE){
+            throw new IllegalArgumentException(ASK_VISIT_DATE_INPUT_IN_VALID_FORMAT.getMessage());
         }
     }
 }
