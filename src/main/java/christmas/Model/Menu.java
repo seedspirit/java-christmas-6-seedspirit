@@ -1,4 +1,4 @@
-package christmas;
+package christmas.Model;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -42,14 +42,27 @@ public enum Menu {
                 .sum();
     }
 
-    public static Integer countAmountOfMenuCategory(Map<String, Integer> foodOrder, String MenuCategory){
+    public static Integer countAmountOfMenuCategory(Map<String, Integer> foodOrder, String menuCategory){
         return Arrays.stream(Menu.values())
-                .filter(menu -> MenuCategory.equals(menu.menuCategory))
+                .filter(menu -> menuCategory.equals(menu.menuCategory))
                 .map(menu -> menu.menuKoreanName)
                 .filter(foodOrder::containsKey)
                 .mapToInt(foodOrder::get)
                 .sum();
+    }
 
+    public static boolean isExistsInMenu(Map<String, Integer> foodOrder){
+        return foodOrder.keySet().stream()
+                .allMatch(foodOrderKey -> Arrays.stream(Menu.values())
+                        .map(menu -> menu.menuKoreanName)
+                        .anyMatch(foodOrderKey::equals));
+    }
+
+    public static boolean isOtherCategoryExistsExcept(String menuCategory, Map<String, Integer> foodOrder){
+        return Arrays.stream(Menu.values())
+                .filter(menu -> !menuCategory.equals(menu.menuCategory))
+                .map(menu -> menu.menuKoreanName)
+                .anyMatch(foodOrder::containsKey);
     }
     public String getMenuCategory() {
         return menuCategory;
