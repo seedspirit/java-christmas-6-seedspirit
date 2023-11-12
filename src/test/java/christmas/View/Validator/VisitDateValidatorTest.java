@@ -1,4 +1,4 @@
-package christmas.View;
+package christmas.View.Validator;
 
 import static christmas.Constants.Message.ExceptionMsg.VisitDateErrorMsg.ASK_NO_EMPTY_INPUT;
 import static christmas.Constants.Message.ExceptionMsg.VisitDateErrorMsg.ASK_NO_WHITE_SPACE;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class VisitDateInputValidatorTest {
+public class VisitDateValidatorTest {
 
     VisitDateValidator validator = new VisitDateValidator();
 
