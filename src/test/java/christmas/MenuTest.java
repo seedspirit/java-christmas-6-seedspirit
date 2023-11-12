@@ -2,11 +2,10 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static christmas.Menu.MENU_CATEGORY_MAIN;
-import static christmas.Menu.MENU_CATEGORY_APPETIZER;
-import static christmas.Menu.MENU_CATEGORY_BEVERAGE;
-import static christmas.Menu.MENU_CATEGORY_DESSERT;
+import static christmas.Model.Menu.MENU_CATEGORY_MAIN;
+import static christmas.Model.Menu.MENU_CATEGORY_BEVERAGE;
 
+import christmas.Model.Menu;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -65,5 +64,35 @@ public class MenuTest {
     void 메인_수_카운트_테스트(Map<String, Integer> foodOrder, Integer expectedTotal){
         assertThat(Menu.countAmountOfMenuCategory(foodOrder, MENU_CATEGORY_MAIN))
                 .isEqualTo(expectedTotal);
+    }
+
+    private static Stream<Arguments> provideFood(){
+        return Stream.of(
+                Arguments.of(Map.of("양송이수프", 2, "타파스", 3), true),
+                Arguments.of(Map.of("티본스테이크", 1, "펩시콜라", 2, "아이스크림", 3), false),
+                Arguments.of(Map.of("샴페인", 3, "토마호크", 2, "시저샐러드", 1), false)
+        );
+    }
+    @DisplayName("입력 메뉴가 메뉴판에 존재하는지 검사하는 메서드 테스트")
+    @ParameterizedTest
+    @MethodSource("provideFood")
+    void 입력_메뉴_메뉴판에_존재여부_테스트(Map<String, Integer> foodOrder, boolean expectedExistence){
+        assertThat(Menu.isExistsInMenu(foodOrder))
+                .isEqualTo(expectedExistence);
+    }
+
+    private static Stream<Arguments> provideOnlyBeverage(){
+        return Stream.of(
+                Arguments.of(Map.of("제로콜라", 2, "레드와인", 3), false),
+                Arguments.of(Map.of("티본스테이크", 1, "제로콜라", 2, "아이스크림", 3), true),
+                Arguments.of(Map.of("샴페인", 3, "레드와인", 2, "제로콜라", 1), false)
+        );
+    }
+    @DisplayName("음료 외 메뉴가 존재하는지 검사하는 메서드 테스트")
+    @ParameterizedTest
+    @MethodSource("provideOnlyBeverage")
+    void 음료_외_메뉴_존재_여부_테스트(Map<String, Integer> foodOrder, boolean expectOtherCategoryExists){
+        assertThat(Menu.isOtherCategoryExistsExcept(MENU_CATEGORY_BEVERAGE, foodOrder))
+                .isEqualTo(expectOtherCategoryExists);
     }
 }
