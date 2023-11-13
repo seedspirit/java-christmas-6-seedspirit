@@ -1,4 +1,4 @@
-package christmas.Model;
+package christmas.Model.Events;
 
 import java.util.Arrays;
 import java.util.Comparator;
