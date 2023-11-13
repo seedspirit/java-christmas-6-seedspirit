@@ -29,8 +29,4 @@ public enum BadgeEvent {
     public String getBadgeName() {
         return badgeName;
     }
-
-    public Integer getCondition() {
-        return condition;
-    }
 }
