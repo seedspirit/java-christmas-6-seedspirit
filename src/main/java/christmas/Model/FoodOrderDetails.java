@@ -10,33 +10,33 @@ import java.util.Map;
 public class FoodOrderDetails {
     private Map<String, Integer> foodOrderDetails;
     public FoodOrderDetails(Map<String, Integer> orderInput){
-        validate();
+        validate(orderInput);
         this.foodOrderDetails = orderInput;
     }
 
-    private void validate(){
-        isFoodInMenu();
-        isFoodAmountInValidRange();
-        isOnlyBeverageOrdered();
+    private void validate(Map<String, Integer> orderInput){
+        isFoodInMenu(orderInput);
+        isFoodAmountInValidRange(orderInput);
+        isOnlyBeverageOrdered(orderInput);
     }
 
-    private void isFoodInMenu(){
-        if(!Menu.isExistsInMenu(foodOrderDetails)){
-            throw new IllegalStateException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
+    private void isFoodInMenu(Map<String, Integer> orderInput){
+        if(!Menu.isExistsInMenu(orderInput)){
+            throw new IllegalArgumentException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
         }
     }
 
-    private void isFoodAmountInValidRange(){
-        for(Integer foodAmount : foodOrderDetails.values()){
+    private void isFoodAmountInValidRange(Map<String, Integer> orderInput){
+        for(Integer foodAmount : orderInput.values()){
             if(foodAmount < MIN_FOOD_AMOUNT || foodAmount > MAX_FOOD_AMOUNT){
-                throw new IllegalStateException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
+                throw new IllegalArgumentException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
             }
         }
     }
 
-    private void isOnlyBeverageOrdered(){
-        if(!Menu.isOtherCategoryExistsExcept(MENU_CATEGORY_BEVERAGE, foodOrderDetails)){
-            throw new IllegalStateException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
+    private void isOnlyBeverageOrdered(Map<String, Integer> orderInput){
+        if(!Menu.isOtherCategoryExistsExcept(MENU_CATEGORY_BEVERAGE, orderInput)){
+            throw new IllegalArgumentException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
         }
     }
 
