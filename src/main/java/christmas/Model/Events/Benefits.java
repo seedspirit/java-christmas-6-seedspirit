@@ -1,9 +1,12 @@
 package christmas.Model.Events;
 
+import static christmas.Constants.DomainConstants.ZERO;
+
 import christmas.Model.FoodOrderDetails;
 import christmas.Model.ReservationDetails;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Benefits {
     private Map<String, Integer> benefits;
@@ -16,21 +19,44 @@ public class Benefits {
     WeekdayDisEvent weekdayDisEvent = new WeekdayDisEvent();
     GiveAwayEvent giveAwayEvent = new GiveAwayEvent();
 
-    public void applyBenefits(ReservationDetails reservation){
+    public void apply(ReservationDetails reservation){
+        initializeBenefits();
+
+        if(reservation.isInEvent()) {
+            applyBenefits(reservation);
+        }
+    }
+
+    private void initializeBenefits(){
+        benefits.put(DDayDisEvent.EVENT_NAME, ZERO);
+        benefits.put(WeekdayDisEvent.EVENT_NAME, ZERO);
+        benefits.put(WeekendDisEvent.EVENT_NAME, ZERO);
+        benefits.put(SpecialDisEvent.EVENT_NAME, ZERO);
+        benefits.put(GiveAwayEvent.EVENT_NAME, ZERO);
+    }
+
+    private void applyBenefits(ReservationDetails reservation){
         FoodOrderDetails foodOrder = reservation.getFoodOrderDetails();
         Integer visitDate = reservation.getVisitDate();
         String visitDayOfWeek = reservation.getVisitDayOfWeek();
 
         benefits.put(DDayDisEvent.EVENT_NAME, dDayDisEvent.applyEvent(visitDate));
-        benefits.put(SpecialDisEvent.EVENT_NAME, specialDisEvent.applyEvent(visitDate, visitDayOfWeek));
         benefits.put(WeekdayDisEvent.EVENT_NAME, weekdayDisEvent.applyEvent(foodOrder, visitDayOfWeek));
         benefits.put(WeekendDisEvent.EVENT_NAME, weekendDisEvent.applyEvent(foodOrder, visitDayOfWeek));
+        benefits.put(SpecialDisEvent.EVENT_NAME, specialDisEvent.applyEvent(visitDate, visitDayOfWeek));
         benefits.put(GiveAwayEvent.EVENT_NAME, giveAwayEvent.applyEvent(foodOrder.getPreDiscountTotal()));
     }
 
     public Integer getTotalBenefitAmount(){
         return benefits.values().stream()
                 .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    public Integer getActualDiscountAmount(){
+        return benefits.entrySet().stream()
+                .filter(benefits -> !GiveAwayEvent.EVENT_NAME.equals(benefits.getKey()))
+                .mapToInt(Entry::getValue)
                 .sum();
     }
 
