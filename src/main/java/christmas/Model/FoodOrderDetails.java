@@ -17,6 +17,7 @@ public class FoodOrderDetails {
     private void validate(Map<String, Integer> orderInput){
         isFoodInMenu(orderInput);
         isFoodAmountInValidRange(orderInput);
+        isAllFoodAmountInValidRange(orderInput);
         isOnlyBeverageOrdered(orderInput);
     }
 
@@ -31,6 +32,12 @@ public class FoodOrderDetails {
             if(foodAmount < MIN_FOOD_AMOUNT || foodAmount > MAX_FOOD_AMOUNT){
                 throw new IllegalArgumentException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
             }
+        }
+    }
+
+    private void isAllFoodAmountInValidRange(Map<String, Integer> orderInput){
+        if(orderInput.values().stream().mapToInt(Integer::intValue).sum() > MAX_FOOD_AMOUNT){
+            throw new IllegalArgumentException(ASK_ORDER_INPUT_IN_VALID_FORMAT.getMessage());
         }
     }
 
