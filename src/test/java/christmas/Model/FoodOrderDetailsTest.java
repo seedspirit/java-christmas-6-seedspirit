@@ -14,7 +14,8 @@ public class FoodOrderDetailsTest {
         return Stream.of(
                 Arguments.of(Map.of("양송이수프", 2, "타파스", 3, "펩시콜라", 4)),
                 Arguments.of(Map.of("티본스테이크", 100, "제로콜라", 2, "아이스크림", 3)),
-                Arguments.of(Map.of("샴페인", 3, "제로콜라", 1, "레드와인", 1))
+                Arguments.of(Map.of("샴페인", 3, "제로콜라", 1, "레드와인", 1)),
+                Arguments.of(Map.of("샴페인", 5, "제로콜라", 10, "레드와인", 5, "티본스테이크", 10))
         );
     }
 
