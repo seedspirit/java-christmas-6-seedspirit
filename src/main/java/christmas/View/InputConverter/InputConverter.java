@@ -1,4 +1,4 @@
-package christmas.View.InputConvertor;
+package christmas.View.InputConverter;
 
 import static christmas.Constants.Message.ExceptionMsg.OrderErrorMsg.ASK_ORDER_INPUT_IN_VALID_FORMAT;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class InputConvertor {
+public class InputConverter {
 
     public Integer convertVisitDate(String visitDateUserInput){
         return Integer.parseInt(visitDateUserInput);
