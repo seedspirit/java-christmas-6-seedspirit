@@ -1,11 +1,10 @@
-package christmas;
+package christmas.Model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static christmas.Model.Menu.MENU_CATEGORY_MAIN;
 import static christmas.Model.Menu.MENU_CATEGORY_BEVERAGE;
 
-import christmas.Model.Menu;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
