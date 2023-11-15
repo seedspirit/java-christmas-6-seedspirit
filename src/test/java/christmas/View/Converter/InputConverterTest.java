@@ -1,9 +1,9 @@
-package christmas.View.Convertor;
+package christmas.View.Converter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import christmas.View.InputConvertor.InputConvertor;
+import christmas.View.InputConverter.InputConverter;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -12,8 +12,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class InputConvertorTest {
-    InputConvertor convertor = new InputConvertor();
+public class InputConverterTest {
+    InputConverter convertor = new InputConverter();
     @DisplayName("중복되는 메뉴를 적었을 때 예외처리 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"티본스테이크-1,제로콜라-2,제로콜라-2", "티본스테이크-1,티본스테이크-1,아이스크림-3"})
