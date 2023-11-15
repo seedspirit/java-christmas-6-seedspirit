@@ -1,4 +1,4 @@
-package christmas;
+package christmas.Model.Events;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
