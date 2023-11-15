@@ -10,14 +10,13 @@ public class ReservationDetails {
     private FoodOrderDetails foodOrderDetails;
     private Integer visitDate;
     private String visitDayOfWeek;
+    private boolean inEvent;
+
     public ReservationDetails(FoodOrderDetails foodOrderDetails, Integer visitDate){
         this.foodOrderDetails = foodOrderDetails;
         this.visitDate = visitDate;
         this.visitDayOfWeek = DayOfWeekConvertor.convert(visitDate);
-    }
-
-    public boolean canParticipateEvents(){
-        return foodOrderDetails.getPreDiscountTotal() >= MIN_PARTICIPATION_FEE;
+        this.inEvent = foodOrderDetails.getPreDiscountTotal() >= MIN_PARTICIPATION_FEE;
     }
 
     public FoodOrderDetails getFoodOrderDetails() {
@@ -30,5 +29,9 @@ public class ReservationDetails {
 
     public String getVisitDayOfWeek() {
         return visitDayOfWeek;
+    }
+
+    public boolean isInEvent() {
+        return inEvent;
     }
 }
