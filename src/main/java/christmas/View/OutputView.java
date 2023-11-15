@@ -1,7 +1,7 @@
 package christmas.View;
 
 
-import christmas.Model.Events.Benefits;
+import christmas.Model.Benefits;
 import christmas.Model.FoodOrderDetails;
 import christmas.Model.Events.GiveAwayEvent;
 import christmas.Model.ReservationDetails;
