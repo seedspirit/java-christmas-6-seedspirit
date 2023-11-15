@@ -4,9 +4,10 @@ import christmas.View.OutputView;
 
 public enum OutputPromptMsg {
     UNIT_OF_AMOUNT(" %d개"),
-    UNIT_OF_KOREAN_MONEY("%d원"),
+    UNIT_OF_KOREAN_MONEY("%,d원"),
     MINUS("-"),
-    NONE("없음"),
+    NO_BENEFIT_HISTORY("없음"),
+    COLON(": "),
     FOOD_ORDER_NOTICE("\n<주문 메뉴>"),
     PRE_DISCOUNT_TOTAL_NOTICE("\n<할인 전 총주문 금액>"),
     GIVEAWAY_MENU_NOTICE("\n<증정 메뉴>"),
