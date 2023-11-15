@@ -30,8 +30,8 @@ public class OutputView {
 
         printFoodOrderDetails(foodOrder);
         printPreDiscountTotal(foodOrder.getPreDiscountTotal());
-        printBenefits(isInEvent, benefits.getBenefits());
         printGiveAwayMenu(benefits.getBenefits());
+        printBenefits(isInEvent, benefits.getBenefits());
         printTotalBenefitAmount(isInEvent, benefits.getTotalBenefitAmount());
         printExpectedPaymentAfterDiscount(foodOrder.getPreDiscountTotal(), benefits.getActualDiscountAmount());
         printBadgeEventResult(benefits.getBadgeForBenefit());
