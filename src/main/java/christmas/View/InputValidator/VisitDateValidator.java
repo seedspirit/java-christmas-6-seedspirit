@@ -8,10 +8,11 @@ import static christmas.Constants.Message.ExceptionMsg.VisitDateErrorMsg.ASK_NO_
 
 
 
-public class VisitDateValidator {
+public class VisitDateValidator implements Validator {
     public final String WHITE_SPACE = " ";
     private final String NUMBER_REGULAR_EXPRESSION = "^[0-9]+$";
 
+    @Override
     public void validate(String visitDateUserInput){
         isNotEmpty(visitDateUserInput);
         containsNoWhiteSpace(visitDateUserInput);
