@@ -1,4 +1,4 @@
-package christmas;
+package christmas.Utils;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
