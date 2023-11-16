@@ -1,4 +1,4 @@
-package christmas;
+package christmas.Model;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -13,8 +13,8 @@ public enum Menu {
     SEAFOOD_PASTA("Main", "해산물파스타", 35_000),
     CHRISTMAS_PASTA("Main", "크리스마스파스타", 25_000),
 
-    CHOCOLATE_CAKE("Dessert", "초코케이크",  15_000),
-    ICE_CREAM("Dessert", "아이스크림",5_000),
+    CHOCOLATE_CAKE("Dessert", "초코케이크", 15_000),
+    ICE_CREAM("Dessert", "아이스크림", 5_000),
 
     ZERO_COLA("Beverage", "제로콜라", 3_000),
     RED_WINE("Beverage","레드와인", 60_000),
@@ -42,14 +42,27 @@ public enum Menu {
                 .sum();
     }
 
-    public static Integer countAmountOfMenuCategory(Map<String, Integer> foodOrder, String MenuCategory){
+    public static Integer countAmountOfMenuCategory(Map<String, Integer> foodOrder, String menuCategory){
         return Arrays.stream(Menu.values())
-                .filter(menu -> MenuCategory.equals(menu.menuCategory))
+                .filter(menu -> menuCategory.equals(menu.menuCategory))
                 .map(menu -> menu.menuKoreanName)
                 .filter(foodOrder::containsKey)
                 .mapToInt(foodOrder::get)
                 .sum();
+    }
 
+    public static boolean isExistsInMenu(Map<String, Integer> foodOrder){
+        return foodOrder.keySet().stream()
+                .allMatch(foodOrderKey -> Arrays.stream(Menu.values())
+                        .map(menu -> menu.menuKoreanName)
+                        .anyMatch(foodOrderKey::equals));
+    }
+
+    public static boolean isOtherCategoryExistsExcept(String menuCategory, Map<String, Integer> foodOrder){
+        return Arrays.stream(Menu.values())
+                .filter(menu -> !menuCategory.equals(menu.menuCategory))
+                .map(menu -> menu.menuKoreanName)
+                .anyMatch(foodOrder::containsKey);
     }
     public String getMenuCategory() {
         return menuCategory;

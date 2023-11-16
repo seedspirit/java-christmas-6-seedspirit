@@ -1,4 +1,4 @@
-package christmas;
+package christmas.Model.Events;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -28,9 +28,5 @@ public enum BadgeEvent {
 
     public String getBadgeName() {
         return badgeName;
-    }
-
-    public Integer getCondition() {
-        return condition;
     }
 }
